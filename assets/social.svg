@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640"
+     font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3987e5" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="#3987e5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="#14140f"/>
+  <circle cx="640" cy="185" r="300" fill="url(#glow)"/>
+
+  <!-- Same motif as the banner, centred. Content stays inside the middle 1280x536
+       so social cards that crop to 1.91:1 lose nothing. -->
+  <g transform="translate(-420 25)" stroke-linecap="round">
+    <g stroke="#8a897f" stroke-width="1.8" opacity=".6" stroke-dasharray="2 5">
+      <line x1="992" y1="144" x2="1070" y2="101"/>
+      <line x1="996" y1="162" x2="1116" y2="169"/>
+      <line x1="990" y1="179" x2="1074" y2="236"/>
+      <line x1="995" y1="154" x2="1167" y2="122"/>
+    </g>
+    <line x1="1086" y1="92" x2="1132" y2="170" stroke="#c3c2b7" stroke-width="2.6" opacity=".9"/>
+
+    <g stroke="#14140f" stroke-width="3">
+      <circle cx="962" cy="160" r="27" fill="none" stroke="#3987e5" stroke-width="5"/>
+      <circle cx="1086" cy="92" r="14" fill="#3987e5"/>
+      <circle cx="1132" cy="170" r="12" fill="#d95926"/>
+      <circle cx="1086" cy="244" r="11" fill="#199e70"/>
+      <circle cx="1178" cy="120" r="7" fill="#8a897f"/>
+    </g>
+  </g>
+
+  <g text-anchor="middle">
+    <text x="640" y="420" font-size="132" font-weight="700" letter-spacing="-4" fill="#ffffff">pyokf</text>
+    <text x="640" y="473" font-size="26" fill="#c3c2b7">Store, query, and generate knowledge in the Open Knowledge Format</text>
+    <text x="640" y="521" font-size="18" letter-spacing="1.6" fill="#8a897f">GWENLAKE · APACHE-2.0 · PYTHON 3.10+</text>
+  </g>
+</svg>

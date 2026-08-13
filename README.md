@@ -1,4 +1,6 @@
-# pyokf
+<!-- Absolute URL on purpose: this README is also the PyPI long description,
+     where relative image paths do not resolve. -->
+<img src="https://raw.githubusercontent.com/gwenlake/pyokf/main/assets/banner.png" alt="pyokf" width="100%">
 
 **A Python library for the [Open Knowledge Format (OKF)](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf)** — store, query, validate, visualize, and auto-generate knowledge bundles that both humans and AI agents can read.
 
