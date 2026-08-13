@@ -8,31 +8,56 @@
   </defs>
 
   <rect width="1280" height="320" fill="#14140f"/>
-  <circle cx="990" cy="160" r="235" fill="url(#glow)"/>
+  <circle cx="1030" cy="158" r="245" fill="url(#glow)"/>
 
-  <!-- Wordmark and tagline -->
+  <!-- Wordmark and tagline, as a block centred on the canvas -->
   <text x="88" y="168" font-size="104" font-weight="700" letter-spacing="-3" fill="#ffffff">pyokf</text>
   <text x="94" y="222" font-size="23" fill="#c3c2b7">Store, query, and generate knowledge in the Open Knowledge Format</text>
-  <text x="94" y="260" font-size="16" letter-spacing="1.4" fill="#8a897f">GWENLAKE · APACHE-2.0 · PYTHON 3.10+</text>
 
-  <!-- A miniature of what the library draws: a folder holding concepts, with one
-       markdown link between two of them. Edges are trimmed at both ends so they
-       neither run through the hollow folder ring nor cross another node. -->
-  <g transform="translate(-30 0)" stroke-linecap="round">
-    <g stroke="#8a897f" stroke-width="1.6" opacity=".6" stroke-dasharray="2 5">
-      <line x1="992" y1="144" x2="1070" y2="101"/>
-      <line x1="996" y1="162" x2="1116" y2="169"/>
-      <line x1="990" y1="179" x2="1074" y2="236"/>
-      <line x1="995" y1="154" x2="1167" y2="122"/>
+  <!-- A miniature of what the library draws: a folder, a subfolder inside it, the
+       concepts they hold (dotted = containment) and markdown links between concepts
+       (solid), one of which crosses the folder boundary. Dotted edges are trimmed
+       clear of the hollow folder rings so they never appear to run through them. -->
+  <g transform="translate(-45 8)" stroke-linecap="round">
+    <g stroke="#8a897f" stroke-width="1.5" opacity=".5" stroke-dasharray="2 5">
+      <line x1="985" y1="134" x2="1044" y2="102"/>
+      <line x1="974" y1="122" x2="1008" y2="69"/>
+      <line x1="985" y1="166" x2="1041" y2="197"/>
+      <line x1="957" y1="184" x2="959" y2="232"/>
+      <line x1="988" y1="160" x2="1152" y2="211"/>
+      <line x1="1089" y1="84" x2="1146" y2="68"/>
+      <line x1="1085" y1="104" x2="1129" y2="133"/>
+      <line x1="1074" y1="113" x2="1085" y2="139"/>
     </g>
-    <line x1="1086" y1="92" x2="1132" y2="170" stroke="#c3c2b7" stroke-width="2.4" opacity=".9"/>
+    <g stroke="#c3c2b7" stroke-width="2.1" opacity=".8">
+      <line x1="1160" y1="64" x2="1140" y2="140"/>
+      <line x1="1140" y1="140" x2="1055" y2="205"/>
+      <line x1="1055" y1="205" x2="1165" y2="215"/>
+      <line x1="960" y1="245" x2="1055" y2="205"/>
+      <line x1="1090" y1="150" x2="1140" y2="140"/>
+      <line x1="1090" y1="150" x2="1055" y2="205"/>
+      <line x1="1160" y1="64" x2="1200" y2="150"/>
+      <line x1="1165" y1="215" x2="1200" y2="150"/>
+      <line x1="1015" y1="58" x2="1065" y2="90"/>
+      <line x1="1015" y1="58" x2="1090" y2="150"/>
+      <line x1="1090" y1="150" x2="1165" y2="215"/>
+      <line x1="1140" y1="140" x2="1200" y2="150"/>
+      <line x1="1160" y1="64" x2="1090" y2="150"/>
+      <line x1="1055" y1="205" x2="1200" y2="150"/>
+      <line x1="960" y1="245" x2="1090" y2="150"/>
+    </g>
 
     <g stroke="#14140f" stroke-width="3">
-      <circle cx="962" cy="160" r="27" fill="none" stroke="#3987e5" stroke-width="5"/>
-      <circle cx="1086" cy="92" r="14" fill="#3987e5"/>
-      <circle cx="1132" cy="170" r="12" fill="#d95926"/>
-      <circle cx="1086" cy="244" r="11" fill="#199e70"/>
-      <circle cx="1178" cy="120" r="7" fill="#8a897f"/>
+      <circle cx="955" cy="150" r="26" fill="none" stroke="#3987e5" stroke-width="5"/>
+      <circle cx="1065" cy="90" r="17" fill="none" stroke="#3987e5" stroke-width="4"/>
+      <circle cx="1160" cy="64" r="11" fill="#3987e5"/>
+      <circle cx="1140" cy="140" r="9" fill="#8a897f"/>
+      <circle cx="1055" cy="205" r="12" fill="#d95926"/>
+      <circle cx="960" cy="245" r="9" fill="#199e70"/>
+      <circle cx="1165" cy="215" r="10" fill="#199e70"/>
+      <circle cx="1090" cy="150" r="8" fill="#d95926"/>
+      <circle cx="1015" cy="58" r="9" fill="#199e70"/>
+      <circle cx="1200" cy="150" r="7" fill="#8a897f"/>
     </g>
   </g>
 </svg>
