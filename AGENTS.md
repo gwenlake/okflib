@@ -79,8 +79,16 @@ Everything lives in `tests/test_pyokf.py`, grouped by banner comment (core spec,
 
 ## Brand assets
 
-`assets/*.svg` are the sources; the committed `.png` files are what the README and GitHub use. Re-render with `rsvg-convert -w 1280 assets/banner.svg -o assets/banner.png` (same for `social.svg`) — never hand-edit a PNG. `banner.png` (1280×320) sits at the top of the README via an **absolute** raw.githubusercontent URL, because the README doubles as the PyPI long description where relative paths break. `social.png` (1280×640) is uploaded manually in the repo settings as the social preview; it is what LinkedIn and Slack show when the repo link is shared. Both reuse the graph view's palette and its visual grammar (hollow ring = folder, filled dot = concept, dotted = containment, solid = markdown link), so the artwork stays a picture of what the library actually does.
+`assets/*.svg` are the sources; the committed `.png` files are what the README and GitHub use. Re-render with `rsvg-convert -w 1280 assets/banner.svg -o assets/banner.png` (same for `social.svg`) — never hand-edit a PNG. `banner.png` (1280×320) sits at the top of the README via a **relative** path, which GitHub rewrites and which therefore works while the repository is private — a `raw.githubusercontent.com` URL needs authentication and renders as a broken image there. The trade-off is PyPI: the README doubles as the long description and PyPI does not resolve relative paths, so switch that one line to the absolute raw URL when publishing (see Releasing). `social.png` (1280×640) is uploaded manually in the repo settings as the social preview; it is what LinkedIn and Slack show when the repo link is shared. Both reuse the graph view's palette and its visual grammar (hollow ring = folder, filled dot = concept, dotted = containment, solid = markdown link), so the artwork stays a picture of what the library actually does.
 
 ## Releasing
 
 Bump the version in **both** `pyproject.toml` and `pyokf/__init__.__version__`, and add a `CHANGELOG.md` entry.
+
+Before publishing to PyPI, point the README banner at the absolute URL — PyPI does not resolve the relative path and would show a broken image:
+
+```markdown
+![pyokf](https://raw.githubusercontent.com/gwenlake/pyokf/main/assets/banner.png)
+```
+
+That URL only works once the repository is public; keep the relative form while it is private.
