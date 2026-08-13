@@ -1,6 +1,8 @@
 # pyokf
 
-**A simple, complete Python library by [Gwenlake](https://gwenlake.com) for the [Open Knowledge Format (OKF)](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf)** — store, query, validate, visualize, and auto-generate knowledge bundles that both humans and AI agents can read.
+**A Python library for the [Open Knowledge Format (OKF)](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf)** — store, query, validate, visualize, and auto-generate knowledge bundles that both humans and AI agents can read.
+
+Developed and maintained by [Gwenlake](https://gwenlake.com).
 
 [![CI](https://github.com/gwenlake/pyokf/actions/workflows/ci.yml/badge.svg)](https://github.com/gwenlake/pyokf/actions)
 [![PyPI](https://img.shields.io/pypi/v/pyokf.svg)](https://pypi.org/project/pyokf/)
