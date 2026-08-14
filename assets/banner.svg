@@ -11,7 +11,7 @@
   <circle cx="1030" cy="158" r="245" fill="url(#glow)"/>
 
   <!-- Wordmark and tagline, as a block centred on the canvas -->
-  <text x="88" y="168" font-size="104" font-weight="700" letter-spacing="-3" fill="#ffffff">pyokf</text>
+  <text x="88" y="168" font-size="104" font-weight="700" letter-spacing="-3" fill="#ffffff">okflib</text>
   <text x="94" y="222" font-size="23" fill="#c3c2b7">Store, query, and generate knowledge in the Open Knowledge Format</text>
 
   <!-- A miniature of what the library draws: a folder, a subfolder inside it, the

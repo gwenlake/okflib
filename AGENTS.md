@@ -4,7 +4,7 @@ This file provides guidance to coding agents when working with code in this repo
 
 ## Project
 
-`pyokf` — a Python library and CLI for the [Open Knowledge Format (OKF)](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf), an open spec published by Google Cloud where knowledge is a directory of markdown files with YAML frontmatter. Developed and maintained by Gwenlake. Apache-2.0.
+`okflib` — a Python library and CLI for the [Open Knowledge Format (OKF)](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf), an open spec published by Google Cloud where knowledge is a directory of markdown files with YAML frontmatter. Developed and maintained by Gwenlake. Apache-2.0.
 
 The spec is the contract: docstrings cite the sections they implement (`SPEC §4`, `§5.3`, `§9`, `§11`). When changing parsing, validation, or serialization behaviour, check the referenced section first.
 
@@ -13,11 +13,11 @@ The spec is the contract: docstrings cite the sections they implement (`SPEC §4
 ```bash
 uv sync --dev                                   # create .venv and install dev deps
 uv run pytest tests/ -q                         # full test suite (fast, no network)
-uv run pytest tests/test_pyokf.py::test_bm25_query -q   # a single test
-uv run ruff check pyokf tests                   # lint (E, F, I, UP, B; line-length 92)
-uv run ruff check --fix pyokf tests
+uv run pytest tests/test_okflib.py::test_bm25_query -q   # a single test
+uv run ruff check okflib tests                  # lint (E, F, I, UP, B; line-length 92)
+uv run ruff check --fix okflib tests
 uv build                                        # wheel + sdist via the uv_build backend
-uv run pyokf --help                             # run the CLI from the working tree
+uv run okflib --help                            # run the CLI from the working tree
 ```
 
 The dataviz palette validator used for the HTML graph lives in the `dataviz` skill
@@ -59,7 +59,7 @@ Load-modify-save is the only persistence model: `Bundle.load(root)` → mutate i
 
 Every LLM entry point takes `complete(system, user) -> str`. `anthropic_complete` (stdlib `urllib`, `ANTHROPIC_API_KEY`, no SDK) is only the default — tests always inject a fake completer, so the suite never touches the network. Keep any new LLM feature behind that same callable.
 
-Ingestion contract: generated concepts are stamped `generated: {by: pyokf/<model>}` and left **unverified**; ID collisions get a numeric suffix rather than overwriting; `ingest_dir` makes one call per file so a single bad file can't sink a run, and records the originating path in `sources`.
+Ingestion contract: generated concepts are stamped `generated: {by: okflib/<model>}` and left **unverified**; ID collisions get a numeric suffix rather than overwriting; `ingest_dir` makes one call per file so a single bad file can't sink a run, and records the originating path in `sources`.
 
 ## The HTML graph view
 
@@ -75,7 +75,7 @@ Runtime is **PyYAML only**. `pypdf` / `python-docx` are the optional `docs` extr
 
 ## Tests
 
-Everything lives in `tests/test_pyokf.py`, grouped by banner comment (core spec, v0.2 signals, CLI, LLM, graph/stats/archives, search/MCP). Conventions: `tmp_path` for disk round-trips, `capsys` + `cli_main([...])` for CLI commands (assert on the exit code), `fake_complete` for ingestion, `_rpc(server, ...)` helpers for MCP. French fixtures are deliberate — they exercise accent-insensitive tokenization and the "answer in the input language" behaviour.
+Everything lives in `tests/test_okflib.py`, grouped by banner comment (core spec, v0.2 signals, CLI, LLM, graph/stats/archives, search/MCP). Conventions: `tmp_path` for disk round-trips, `capsys` + `cli_main([...])` for CLI commands (assert on the exit code), `fake_complete` for ingestion, `_rpc(server, ...)` helpers for MCP. French fixtures are deliberate — they exercise accent-insensitive tokenization and the "answer in the input language" behaviour.
 
 ## Brand assets
 
@@ -83,12 +83,12 @@ Everything lives in `tests/test_pyokf.py`, grouped by banner comment (core spec,
 
 ## Releasing
 
-Bump the version in **both** `pyproject.toml` and `pyokf/__init__.__version__`, and add a `CHANGELOG.md` entry.
+Bump the version in **both** `pyproject.toml` and `okflib/__init__.__version__`, and add a `CHANGELOG.md` entry.
 
 Before publishing to PyPI, point the README banner at the absolute URL — PyPI does not resolve the relative path and would show a broken image:
 
 ```markdown
-![pyokf](https://raw.githubusercontent.com/gwenlake/pyokf/main/assets/banner.png)
+![okflib](https://raw.githubusercontent.com/gwenlake/okflib/main/assets/banner.png)
 ```
 
 That URL only works once the repository is public; keep the relative form while it is private.

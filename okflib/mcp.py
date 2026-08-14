@@ -6,11 +6,11 @@ bundle, open concepts, and ground its answers in your knowledge base.
 
 Register with Claude Code::
 
-    claude mcp add my-kb -- pyokf mcp /path/to/bundle
+    claude mcp add my-kb -- okflib mcp /path/to/bundle
 
 or in a Claude Desktop / claude.ai connector config::
 
-    {"mcpServers": {"my-kb": {"command": "pyokf", "args": ["mcp", "/path/to/bundle"]}}}
+    {"mcpServers": {"my-kb": {"command": "okflib", "args": ["mcp", "/path/to/bundle"]}}}
 
 MCP docs: https://modelcontextprotocol.io
 """
@@ -75,7 +75,7 @@ TOOLS = [
 class MCPServer:
     """Minimal stdio MCP server over a loaded :class:`Bundle`."""
 
-    def __init__(self, bundle: Bundle, name: str = "pyokf") -> None:
+    def __init__(self, bundle: Bundle, name: str = "okflib") -> None:
         self.bundle = bundle
         self.name = name
         self._index = Index(bundle)

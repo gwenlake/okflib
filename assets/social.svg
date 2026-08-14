@@ -10,8 +10,8 @@
   <rect width="1280" height="640" fill="#14140f"/>
   <circle cx="640" cy="320" r="330" fill="url(#glow)"/>
 
-  <!-- Wordmark alone. The baseline sits above the geometric centre so the block
-       reads centred despite the descenders of p and y. -->
-  <text x="640" y="366" text-anchor="middle" font-size="180" font-weight="700"
-        letter-spacing="-6" fill="#ffffff">pyokf</text>
+  <!-- Wordmark alone. No glyph descends, so the baseline sits below the geometric
+       centre by half the ascender height and the block reads centred. -->
+  <text x="640" y="385" text-anchor="middle" font-size="180" font-weight="700"
+        letter-spacing="-6" fill="#ffffff">okflib</text>
 </svg>

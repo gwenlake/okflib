@@ -1,4 +1,4 @@
-"""pyokf — a small Python library for the Open Knowledge Format (OKF).
+"""okflib — a small Python library for the Open Knowledge Format (OKF).
 
 Developed and maintained by Gwenlake (https://gwenlake.com).
 
@@ -10,7 +10,7 @@ Spec: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPE
 
 Quick start::
 
-    from pyokf import Bundle
+    from okflib import Bundle
 
     bundle = Bundle()
     c = bundle.create(

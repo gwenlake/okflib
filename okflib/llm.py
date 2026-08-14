@@ -10,7 +10,7 @@ Design:
   Anthropic Messages API (docs: https://docs.claude.com/en/api/overview)
   using the ``ANTHROPIC_API_KEY`` environment variable — no SDK required.
 - Per the v0.2 spec, generated concepts are stamped
-  ``generated: {by: pyokf/<model>, at: ...}`` and left **unverified**:
+  ``generated: {by: okflib/<model>, at: ...}`` and left **unverified**:
   a human (or another process) is expected to ``verify()`` them.
 """
 
@@ -28,9 +28,9 @@ from .concept import Concept, OKFError
 from .trust import Source, Stamp
 
 #: Model used when none is given. Override per run with ``--model`` / the
-#: ``model=`` argument, or globally with the ``PYOKF_MODEL`` env var.
+#: ``model=`` argument, or globally with the ``OKFLIB_MODEL`` env var.
 FALLBACK_MODEL = "claude-sonnet-5"
-DEFAULT_MODEL = os.environ.get("PYOKF_MODEL") or FALLBACK_MODEL
+DEFAULT_MODEL = os.environ.get("OKFLIB_MODEL") or FALLBACK_MODEL
 
 API_URL = "https://api.anthropic.com/v1/messages"
 API_VERSION = "2023-06-01"
@@ -161,7 +161,7 @@ def ingest_text(
     items = _parse_json_array(complete(SYSTEM_PROMPT, user))
 
     created: list[str] = []
-    stamp_by = f"pyokf/{model}"
+    stamp_by = f"okflib/{model}"
     now = datetime.now(timezone.utc)
     for item in items:
         if not isinstance(item, dict) or not item.get("type"):

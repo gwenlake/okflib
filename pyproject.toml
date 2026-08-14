@@ -3,7 +3,7 @@ requires = ["uv_build>=0.11,<0.13"]
 build-backend = "uv_build"
 
 [project]
-name = "pyokf"
+name = "okflib"
 version = "0.5.0"
 description = "Store, query, and generate knowledge in the Open Knowledge Format (OKF) — markdown bundles with YAML frontmatter, trust signals, CLI, and LLM ingestion."
 readme = "README.md"
@@ -30,13 +30,13 @@ dependencies = ["PyYAML>=6.0"]
 docs = ["pypdf>=4", "python-docx>=1"]
 
 [project.urls]
-Homepage = "https://github.com/gwenlake/pyokf"
+Homepage = "https://github.com/gwenlake/okflib"
 Organization = "https://gwenlake.com"
-Repository = "https://github.com/gwenlake/pyokf"
+Repository = "https://github.com/gwenlake/okflib"
 "OKF Specification" = "https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf"
 
 [project.scripts]
-pyokf = "pyokf.cli:main"
+okflib = "okflib.cli:main"
 
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.6"]

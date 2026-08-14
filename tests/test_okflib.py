@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from pyokf import Bundle, Concept, ConceptNotFound, FrontmatterError, OKFError
+from okflib import Bundle, Concept, ConceptNotFound, FrontmatterError, OKFError
 
 SAMPLE = textwrap.dedent(
     """\
@@ -272,8 +272,8 @@ def test_v02_validation_warnings():
 
 import json  # noqa: E402
 
-from pyokf.cli import main as cli_main  # noqa: E402
-from pyokf.llm import LLMError, _parse_json_array, ingest_text  # noqa: E402
+from okflib.cli import main as cli_main  # noqa: E402
+from okflib.llm import LLMError, _parse_json_array, ingest_text  # noqa: E402
 
 
 def test_cli_workflow(tmp_path, capsys):
@@ -344,7 +344,7 @@ def test_cli_rejects_legacy_bundle_argument(tmp_path, capsys):
     capsys.readouterr()
     assert cli_main(["list", root, "--tier", "unverified"]) == 2
     err = capsys.readouterr().err
-    assert "no longer an argument" in err and f"pyokf -C {root} list" in err
+    assert "no longer an argument" in err and f"okflib -C {root} list" in err
 
 
 def fake_complete(system, user):
@@ -376,7 +376,7 @@ def test_ingest_text():
     created = ingest_text(b, "Réunion: budget validé...", complete=fake_complete)
     assert created == ["notes/reunion", "metrics/budget"]
     c = b["notes/reunion"]
-    assert c.generated.by.startswith("pyokf/")
+    assert c.generated.by.startswith("okflib/")
     assert c.trust_tier == "unverified"  # LLM output starts unverified
     assert b.validate().conformant
 
@@ -406,7 +406,7 @@ def test_ingest_missing_type():
 # Completeness features: okf_version, archives, graph exports, stats
 # --------------------------------------------------------------------- #
 
-from pyokf.graph import to_dot, to_json, to_mermaid  # noqa: E402
+from okflib.graph import to_dot, to_json, to_mermaid  # noqa: E402
 
 
 def _demo_bundle():
@@ -454,7 +454,7 @@ def test_graph_exports():
 
 
 def test_html_export_is_self_contained():
-    from pyokf.graph import to_html
+    from okflib.graph import to_html
 
     html = to_html(_demo_bundle(), title="Démo")
     assert html.startswith("<!doctype html>")
@@ -483,7 +483,7 @@ def test_html_export_is_self_contained():
 
 def test_payload_nests_directories():
     """A folder node per path segment: papers → papers/legislative → concepts."""
-    from pyokf.graph import _payload
+    from okflib.graph import _payload
 
     b = Bundle()
     b.create("papers/legislative/take-it-down", type="Reference", description="d")
@@ -532,7 +532,7 @@ def test_cli_ingest_shows_progress(tmp_path, monkeypatch, capsys):
     (docs / "note.md").write_text("# Titre\n\nContenu.")
     assert cli_main(["init", str(root)]) == 0
     monkeypatch.setattr(
-        "pyokf.llm.anthropic_complete", lambda s, u, **kw: fake_complete(s, u)
+        "okflib.llm.anthropic_complete", lambda s, u, **kw: fake_complete(s, u)
     )
     assert cli_main(["-C", str(root), "ingest", str(docs)]) == 0
     out = capsys.readouterr().out
@@ -556,7 +556,7 @@ def test_cli_ingest_single_file_uses_readers(tmp_path, monkeypatch, capsys):
         bundle.create("notes/x", type="Note", title="X")
         return ["notes/x"]
 
-    monkeypatch.setattr("pyokf.llm.ingest_text", fake_ingest_text)
+    monkeypatch.setattr("okflib.llm.ingest_text", fake_ingest_text)
     assert cli_main(["-C", str(root), "ingest", str(page)]) == 0
     # HTML tags stripped by the reader, not read as raw bytes
     assert "Titre" in seen["text"] and "<h1>" not in seen["text"]
@@ -656,7 +656,7 @@ def test_html_graph_boots_and_frames_itself(tmp_path):
     the graph is inside the viewport on the first frame, and simulates a drag to
     check the layout keeps reacting while a node is held.
     """
-    from pyokf.graph import to_html
+    from okflib.graph import to_html
 
     page = tmp_path / "graph.html"
     page.write_text(to_html(_demo_bundle()), encoding="utf-8")
@@ -708,10 +708,10 @@ def test_cli_graph_stats_export(tmp_path, capsys):
 # Readers, BM25 retrieval, directory ingestion, ask, MCP
 # --------------------------------------------------------------------- #
 
-from pyokf.llm import ask, ingest_dir  # noqa: E402
-from pyokf.mcp import MCPServer  # noqa: E402
-from pyokf.readers import ReaderError, iter_documents, read_text  # noqa: E402
-from pyokf.search import Index  # noqa: E402
+from okflib.llm import ask, ingest_dir  # noqa: E402
+from okflib.mcp import MCPServer  # noqa: E402
+from okflib.readers import ReaderError, iter_documents, read_text  # noqa: E402
+from okflib.search import Index  # noqa: E402
 
 
 def test_readers(tmp_path):

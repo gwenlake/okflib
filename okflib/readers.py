@@ -2,7 +2,7 @@
 
 Core (stdlib only): markdown, txt, rst, csv/tsv, json, yaml, html
 (tags stripped), and source code files. Optional, via
-``pip install pyokf[docs]``: PDF (pypdf) and Word (python-docx).
+``pip install okflib[docs]``: PDF (pypdf) and Word (python-docx).
 Unsupported or binary files are skipped with a reason.
 """
 
@@ -81,7 +81,7 @@ def read_text(path: str | Path) -> str:
             from pypdf import PdfReader
         except ImportError:
             raise ReaderError(
-                f"{path.name}: PDF support requires `pip install pyokf[docs]`"
+                f"{path.name}: PDF support requires `pip install okflib[docs]`"
             ) from None
         try:
             return "\n\n".join(
@@ -95,7 +95,7 @@ def read_text(path: str | Path) -> str:
             import docx
         except ImportError:
             raise ReaderError(
-                f"{path.name}: .docx support requires `pip install pyokf[docs]`"
+                f"{path.name}: .docx support requires `pip install okflib[docs]`"
             ) from None
         try:
             return "\n".join(

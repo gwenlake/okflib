@@ -1,21 +1,21 @@
-"""pyokf command-line interface.
+"""okflib command-line interface.
 
 Like ``git`` or ``uv``, the CLI works on the bundle you are *inside*: run
-``pyokf init``, ``cd`` into it, and every command applies to it — no path to
+``okflib init``, ``cd`` into it, and every command applies to it — no path to
 repeat. Outside a bundle (or in scripts and CI), point at one with ``-C``.
 
 Usage examples::
 
-    pyokf init mon_bundle && cd mon_bundle
-    pyokf add notes/idee --type Note --title "Idée" -d "À creuser."
-    pyokf list --type Note --tier human-reviewed
-    pyokf show notes/idee
-    pyokf verify notes/idee --by human:sylvain@gwenlake.com
-    pyokf validate
-    pyokf ingest ~/documents/           # a directory, a file, or '-' for stdin
-    pyokf ask "quel est le budget ?"
+    okflib init mon_bundle && cd mon_bundle
+    okflib add notes/idee --type Note --title "Idée" -d "À creuser."
+    okflib list --type Note --tier human-reviewed
+    okflib show notes/idee
+    okflib verify notes/idee --by human:sylvain@gwenlake.com
+    okflib validate
+    okflib ingest ~/documents/           # a directory, a file, or '-' for stdin
+    okflib ask "quel est le budget ?"
 
-    pyokf -C mon_bundle stats           # from anywhere
+    okflib -C mon_bundle stats           # from anywhere
 """
 
 from __future__ import annotations
@@ -29,9 +29,9 @@ from pathlib import Path
 from . import __version__
 from .bundle import Bundle, find_bundle_root, is_bundle_root
 from .concept import OKFError
-from .llm import DEFAULT_MODEL  # honours the PYOKF_MODEL env var
+from .llm import DEFAULT_MODEL  # honours the OKFLIB_MODEL env var
 
-MODEL_HELP = f"LLM to use (default: {DEFAULT_MODEL}; set PYOKF_MODEL to change it)"
+MODEL_HELP = f"LLM to use (default: {DEFAULT_MODEL}; set OKFLIB_MODEL to change it)"
 
 
 # ---------------------------------------------------------------------- #
@@ -74,8 +74,8 @@ def _root(args) -> Path:
     root = find_bundle_root()
     if root is None:
         raise OKFError(
-            "not inside an OKF bundle — run `pyokf init` here, cd into a bundle, "
-            "or point at one with `pyokf -C <path> ...`"
+            "not inside an OKF bundle — run `okflib init` here, cd into a bundle, "
+            "or point at one with `okflib -C <path> ...`"
         )
     return root
 
@@ -319,19 +319,19 @@ def cmd_ingest(args) -> int:
         )
     print(_paint(summary, BOLD))
     if created:
-        print(_paint("Review them: pyokf list --tier unverified", DIM))
+        print(_paint("Review them: okflib list --tier unverified", DIM))
     return 0
 
 
 LEGACY_HINT = """\
-error: `pyokf {command} {arg}` — the bundle is no longer an argument (since 0.5.0).
+error: `okflib {command} {arg}` — the bundle is no longer an argument (since 0.5.0).
 
-    cd {arg} && pyokf {command}{rest}
-    pyokf -C {arg} {command}{rest}"""
+    cd {arg} && okflib {command}{rest}
+    okflib -C {arg} {command}{rest}"""
 
 
 def _legacy_bundle_arg(argv: list[str]) -> str | None:
-    """Detect the pre-0.5 ``pyokf <cmd> <bundle> ...`` form and explain the move."""
+    """Detect the pre-0.5 ``okflib <cmd> <bundle> ...`` form and explain the move."""
     if len(argv) < 2 or argv[0].startswith("-") or argv[0] == "init":
         return None
     candidate = argv[1]
@@ -362,12 +362,12 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     parser = argparse.ArgumentParser(
-        prog="pyokf",
+        prog="okflib",
         description=(
             "Manage Open Knowledge Format (OKF) bundles. Commands apply to the "
             "bundle you are inside, like git; use -C to point at another one."
         ),
-        epilog="pyokf is developed and maintained by Gwenlake (https://gwenlake.com).",
+        epilog="okflib is developed and maintained by Gwenlake (https://gwenlake.com).",
         parents=[common],
     )
     # NB: no set_defaults(bundle=...) here — `parents=` shares the action object
@@ -376,7 +376,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--version",
         action="version",
-        version=f"pyokf {__version__} — a Gwenlake library (https://gwenlake.com)",
+        version=f"okflib {__version__} — a Gwenlake library (https://gwenlake.com)",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -464,7 +464,7 @@ def main(argv: list[str] | None = None) -> int:
     p.set_defaults(func=cmd_ask)
 
     p = add("mcp", "serve the bundle to Claude via MCP (stdio)")
-    p.add_argument("--name", default="pyokf")
+    p.add_argument("--name", default="okflib")
     p.set_defaults(func=cmd_mcp)
 
     p = sub.add_parser(
@@ -485,7 +485,7 @@ def main(argv: list[str] | None = None) -> int:
     except OKFError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
-    except BrokenPipeError:  # e.g. `pyokf list | head`
+    except BrokenPipeError:  # e.g. `okflib list | head`
         return 0
 
 

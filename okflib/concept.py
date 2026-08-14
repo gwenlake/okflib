@@ -40,7 +40,7 @@ RECOMMENDED_KEYS = ("title", "description", "resource", "tags")
 
 
 class OKFError(Exception):
-    """Base error for the pyokf library."""
+    """Base error for the okflib library."""
 
 
 class FrontmatterError(OKFError):
