@@ -1,0 +1,53 @@
+[build-system]
+requires = ["uv_build>=0.11,<0.13"]
+build-backend = "uv_build"
+
+[project]
+name = "okflib"
+version = "0.5.0"
+description = "Store, query, and generate knowledge in the Open Knowledge Format (OKF) — markdown bundles with YAML frontmatter, trust signals, CLI, and LLM ingestion."
+readme = "README.md"
+authors = [{ name = "Gwenlake", email = "contact@gwenlake.com" }]
+maintainers = [{ name = "Gwenlake", email = "contact@gwenlake.com" }]
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+keywords = ["okf", "open-knowledge-format", "knowledge", "markdown", "frontmatter", "llm", "agents"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Text Processing :: Markup :: Markdown",
+]
+dependencies = ["PyYAML>=6.0"]
+
+[project.optional-dependencies]
+docs = ["pypdf>=4", "python-docx>=1"]
+
+[project.urls]
+Homepage = "https://github.com/gwenlake/okflib"
+Organization = "https://gwenlake.com"
+Repository = "https://github.com/gwenlake/okflib"
+"OKF Specification" = "https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf"
+
+[project.scripts]
+okflib = "okflib.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.uv.build-backend]
+module-root = ""
+
+[tool.ruff]
+line-length = 92
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E731"]

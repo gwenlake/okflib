@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640"
+     font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3987e5" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="#3987e5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="#14140f"/>
+  <circle cx="640" cy="320" r="330" fill="url(#glow)"/>
+
+  <!-- Wordmark alone. No glyph descends, so the baseline sits below the geometric
+       centre by half the ascender height and the block reads centred. -->
+  <text x="640" y="385" text-anchor="middle" font-size="180" font-weight="700"
+        letter-spacing="-6" fill="#ffffff">okflib</text>
+</svg>
